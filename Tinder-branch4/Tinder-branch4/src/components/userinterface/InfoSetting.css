@@ -1,0 +1,33 @@
+
+.infoSetting{
+    display: block;
+    margin-top: 10vh;
+}
+.bt__swipeButtons__star{
+    color: #62b4f9 !important;
+}
+.bt__swipeButtons__star h2{
+    font-size: small;
+    font-family: 'Open Sans', sans-serif;
+}
+.infoSetting__title{
+    text-align: center;
+    color: #62b4f9;
+    font-size: x-large;
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+.infoSetting__changeInfo{
+    padding-top: 26px;
+    width: 300px;
+    margin: auto;
+}
+.infoSetting__changeInfo div{
+    padding-bottom: 2px;
+}
+.bt{
+    display: flex;
+    padding-top: 40px;
+    justify-content: center;
+}

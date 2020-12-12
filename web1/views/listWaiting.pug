@@ -1,0 +1,17 @@
+extends layout
+
+mixin message(name)
+    each user in users
+        div #{user.email}
+        form(action=`/accept/${user.id}` method = "POST")
+            button accept 
+            
+           
+append links 
+    li(style="float: right;")
+        a(href="/edit") Edit 
+
+block content
+    .dashboard 
+        .user 
+            +message(name)

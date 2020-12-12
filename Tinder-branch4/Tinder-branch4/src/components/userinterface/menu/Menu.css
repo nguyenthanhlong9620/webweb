@@ -1,0 +1,40 @@
+.menu{
+    display: block;
+    height: 100vh;
+    width: 25vw;
+}
+.active__messege{
+    display: block;
+}
+.active__match{
+    display: block;
+}
+.active__like{
+    display: block;
+}
+.nonactive__messege{
+    display: none;
+}
+.nonactive__match{
+    display: none;
+}
+.nonactive__like{
+    display: none;
+}
+.active__profile{
+    display: block;
+}
+.nonactive__profile{
+    display: none;
+}
+.active__notification{
+    display: block;
+}
+.nonactive__notification{
+    display: none;
+}
+@media screen and (max-width: 960px) {
+    .menu{
+        display: none;
+    }
+}

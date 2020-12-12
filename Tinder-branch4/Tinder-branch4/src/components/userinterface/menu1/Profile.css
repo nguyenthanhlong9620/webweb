@@ -1,0 +1,29 @@
+.avatar{
+    padding-top: 35px;
+    padding-bottom: 20px;
+}
+.bottom__{
+    position: fixed;
+    height: 10%;
+    width: 25%;
+    bottom: 0;
+}
+.button__{
+    text-align: center;
+    padding: 3px;
+    font-family: 'Open Sans', sans-serif;
+    color: #6bd4fe;
+}
+.button__:hover{
+    cursor: pointer;
+    color: #88fcfc;;
+}
+.profile{
+    text-align: center;
+    color: rgb(83, 83, 83);
+    font-family: 'Open Sans', sans-serif;
+}
+.profile p{
+    color: gray;
+    font-family: 'Open Sans', sans-serif;
+}

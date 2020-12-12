@@ -1,0 +1,14 @@
+.medium{
+    width: auto;
+    height: auto;
+    display: block;
+    max-width: 100px;
+    max-height: 90px;
+}
+.small{
+    width: auto;
+    height: auto;
+    display: block;
+    max-width: 70px;
+    max-height: 35px;
+}

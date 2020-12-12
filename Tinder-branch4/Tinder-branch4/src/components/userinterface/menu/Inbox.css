@@ -1,0 +1,37 @@
+.boxChat{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    height: 90px;
+    border-bottom: 1px solid #fafafa;
+    font-size: 12.5px;
+}
+.boxChat:hover{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    height: 90px;
+    border-bottom: 1px solid #fafafa;
+    font-size: 12.5px;
+    background-color: rgb(247, 247, 247);
+}
+.boxChat__details{
+    flex: 1;
+    padding-right: 10px;
+    margin-left: 10px;
+    font-family: 'Open Sans', sans-serif;
+}
+.boxChat__details > p{
+    color: gray;
+    font-family: 'Open Sans', sans-serif;
+}
+.boxChat__timestamp{
+    font-family: 'Open Sans', sans-serif;
+    color: lightgray;
+}
+.chat__image{
+    margin-right: px;
+}

@@ -1,0 +1,15 @@
+extends layout
+
+mixin message(name)
+    each user in users
+        div #{user.email}
+            
+           
+append links 
+    li(style="float: right;")
+        a(href="/edit") Edit 
+
+block content
+    .dashboard 
+        .user 
+            +message(name)

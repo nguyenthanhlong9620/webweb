@@ -1,0 +1,26 @@
+extends layout
+
+mixin message(opp, name)
+    if(opp)
+        h1.greeting Logged in as 
+            span=name
+            span=id
+    else 
+        h1.greeting Welcome 
+            span=name 
+            |  to our website
+
+
+append links 
+    li(style="float: right;")
+        a(href="/loggout") Loggout
+        a(href="/profile") Profile
+        a(href="/listUser") ListUser
+        a(href="/listSending") ListSending
+        a(href="/listWaiting") ListWaiting
+        a(href="/listFriends") ListFriends      
+
+block content
+    .dashboard 
+        .user 
+            +message(opp, name)

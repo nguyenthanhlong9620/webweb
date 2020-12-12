@@ -1,0 +1,28 @@
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
+import Navbar from './components/Navbar';
+import { BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
+import Home from './components/pages/Home'
+import Footer from './components/Footer';
+import NavbarMenu from './components/userinterface/NavbarMenu';
+import User from './components/pages/User';
+import InfoSetting from './components/userinterface/InfoSetting';
+
+const id = localStorage.getItem('id');
+
+function App() {
+  return (
+    <>
+      <Router>
+        <Switch>
+          <Route path='/' exact component={Home}/>
+          <Route path='/user' exact component={User}/>
+          <Route path='/infoSetting' exact component={InfoSetting}/>
+        </Switch>
+      </Router>
+    </>
+  );
+}
+
+export default App;

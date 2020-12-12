@@ -1,0 +1,17 @@
+extends layout
+
+mixin message(name)
+        h1.greeting Profile
+            p name: #{profile.name}
+            p age: #{profile.age}
+            p user_id: #{profile.user_id}
+            p description: #{profile.description}
+           
+append links 
+    li(style="float: right;")
+        a(href="/edit") Edit 
+
+block content
+    .dashboard 
+        .user 
+            +message(name)
