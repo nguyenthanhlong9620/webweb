@@ -173,7 +173,7 @@ router.get('/dangki', (req, res, next) => {
 });
 
 // list user for match
-router.get('/listUser', (req, res, next) => {
+router.post('/listUser', (req, res, next) => {
     // pool.query(`SELECT * FROM user where not user.id = ${req.session.user.id}`, function (err, result) {
     //     if (err) throw err;
     //     res.render('listUser', { users: result })
@@ -183,6 +183,7 @@ router.get('/listUser', (req, res, next) => {
         if (err) throw err;
         return res.json(result);
     });
+
 });
 
 // list user for match

@@ -11,30 +11,45 @@ import ChangeProfile from '../userinterface/menu1/ChangeProfile'
 import { BrowserRouter as Router, Redirect, Route} from 'react-router-dom';
 import auth from "../../auth";
 import axios from 'axios';
+import StartButton from '../userinterface/swipeScreen/StartButton';
+import Hope from '../userinterface/swipeScreen/Hope'
 
 function User({ location }) {
+    const [dataListUser, setDataListUser] = useState([])
     const uid = auth.checkLogin();
     const [profile, setProfile] = useState(false)
     const [changeProfile, setChangeProfile] = useState(false)
     const [name, setName] = useState('')
     const [status, setStatus] = useState('')
     const [screenChat, setScreenChat] = useState(false)
+    const [card, setCard] = useState(false)
+    const [bt, setBt] = useState(true)
     const { id } = queryString.parse(location.search);
+    const [h, seth] = useState(false)
+    const [f, setf] = useState(false)
 
 
-    const handleSubmit = async(event) => {
-          event.preventDefault();
-          const dataList = await
-          axios({
-            method: 'get',
-            url: 'http://localhost:1000/listUser',
-            data: {
-              id: '21'
-            }
-          });
-          localStorage.setItem('listCardTinder', dataList)
-          console.log('list' + localStorage.getItem('listCardTinder'))
-        }
+    const handleSubmit = () => {
+        //   event.preventDefault();
+        //   const dataList = await
+        //   axios({
+        //     method: 'post',
+        //     url: 'http://localhost:1000/listUser',
+        //     data: {
+        //       id: '41'
+        //     }
+        //   });
+        // //   localStorage.setItem('listCardTinder', dataList)
+        // //   console.log('list' + localStorage.getItem('listCardTinder'))
+        // setDataListUser(dataList.data)
+        // console.log(dataList.data)
+        const article = { id: '41' };
+        axios.post('http://localhost:1000/listUser', article)
+            .then(response => setDataListUser(response.data));
+            console.log(dataListUser)
+            setBt(false)
+            seth(true)
+    }
       
     const activeProfile = () => {
         setProfile(true);
@@ -55,14 +70,23 @@ function User({ location }) {
         setName(a)
         setStatus(b)
         setScreenChat(true);
+        setCard(false);
     }
     const unActiveScreenChat = () => {
         setScreenChat(false);
+        setCard(true);
     }
     useEffect(() => {
         console.log('lc: ' + location);
         console.log('id: ' + id);
+        
     });
+
+    const hopeeee = () => {
+        seth(false)
+        setCard(true)
+        console.log('xin chao cuoc doi')
+    }
 
     return (
         <>
@@ -77,12 +101,15 @@ function User({ location }) {
                     <Menu activeScreenChat={activeScreenChat} />
                 </div>
                 <div className='swipeDisplay'>
-                    {screenChat ? (<ScreenChat unActiveScreenChat={unActiveScreenChat} name={name} status={status} />) : (<TinderCards profile={activeProfile} />)}
+                    {screenChat ? (<ScreenChat unActiveScreenChat={unActiveScreenChat} name={name} status={status} />) : (<></>)}
+                    {card ? (<TinderCards profile={activeProfile} dataListUser = {dataListUser} />) : (<></>)}
+                    {h ? (<Hope click={hopeeee}/>):(<></>)}
+                    {bt ? (<StartButton click={handleSubmit} />):(<></>)}
+            
                 </div>
                 <div className='Menu'>
                     <Menu1 changeProfile={activeChangeProfile} />
                 </div>
-                <button onClick={handleSubmit}>click</button>
             </div>
         </>
     )
