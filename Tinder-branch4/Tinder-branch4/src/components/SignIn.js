@@ -70,10 +70,13 @@ export default function SignIn({clickToSignUp,clickToForgot}) {
           localStorage.setItem('name',dataSignIn.data.name);
           localStorage.setItem('sex',dataSignIn.data.sex);
           localStorage.setItem('age',dataSignIn.data.age);
-          localStorage.setItem('des',dataSignIn.data.description); 
+          localStorage.setItem('des',dataSignIn.data.description);
           localStorage.setItem('like',dataSignIn.data.partner_sexual_type);
           localStorage.setItem('id',dataSignIn.data.user_id);
-          
+          localStorage.setItem('profileId',dataSignIn.data.id);
+
+
+
           history.push(`/user?id=${dataSignIn.data.user_id}`);
         } else {
           localStorage.setItem('id',dataSignIn.data);
@@ -85,8 +88,8 @@ export default function SignIn({clickToSignUp,clickToForgot}) {
       }
     }
   } 
-  
-  
+    
+
 
   // useEffect(() => {
   //   handleSubmit()

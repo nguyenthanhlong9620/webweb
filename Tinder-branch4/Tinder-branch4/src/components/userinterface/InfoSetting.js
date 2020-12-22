@@ -41,40 +41,41 @@ function InfoSetting() {
     let history = useHistory();
     const [imgUpload, setImgUpload] = useState('');
     const [birthday, setBirthday] = useState('2000-09-11');
-    const [name, setName] = useState(localStorage.getItem('name'));
-    const [des, setDes] = useState(localStorage.getItem('des'));
-    const [age, setAge] = useState(localStorage.getItem('age'));
-    const [sex, setSex] = useState(localStorage.getItem('sex'));
-    const [like, setLike] = useState(localStorage.getItem('like'));
+    const [name, setName] = useState('');
+    const [des, setDes] = useState('');
+    const [age, setAge] = useState('');
+    const [sex, setSex] = useState('male');
+    const [like, setLike] = useState('female');
 
     const classes = useStyles();
 
     const handleSubmit = async (event) => {
         setAge(nowYear - birthday.substr(0, 4))
         localStorage.setItem("name", name);
-        localStorage.setItem("age", age);
+        localStorage.setItem("age", nowYear - birthday.substr(0, 4));
         localStorage.setItem("sex", sex);
         localStorage.setItem("des", des);
         localStorage.setItem("like", like);
-        history.push(`/user?id=${localStorage.getItem('id')}`);
+        // history.push(`/user?id=${localStorage.getItem('id')}`);
+        history.push(`/test`);
+        
 
         event.preventDefault();
-        const dataSignIn = await
+        const daTa = await
             axios({
                 method: 'post',
                 url: 'http://localhost:1000/edit_profile',
                 data: {
                     user_id: localStorage.getItem('id'),
                     name: name,
-                    age: age,
+                    age: nowYear - birthday.substr(0, 4),
                     sex: sex,
                     description: des,
                     partner_sexual_type: like,
                 }
             });
-            
+        
     }
-
 
     return (
 
@@ -137,8 +138,8 @@ function InfoSetting() {
                     />
                 </div>
             </div>
-            <div className="bt">
-                <Button className="bt__swipeButtons__star" onClick={handleSubmit}>
+            <div className="bbt">
+                <Button className="bbt__swipeButtons__star" onClick={handleSubmit}>
                     <h2>Done</h2>
                 </Button>
             </div>

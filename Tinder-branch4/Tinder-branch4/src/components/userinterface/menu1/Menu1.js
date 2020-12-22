@@ -3,15 +3,25 @@ import '../menu/Menu.css'
 import NavbarMenu from '../NavbarMenu';
 import Profile from './Profile';
 import Notification from './Notification';
+import ChangeAvatar from './ChangeAvatar';
+import axios from 'axios';
 
-function Menu1({changeProfile}) {
+function Menu1({changeProfile, image, activeChangeAvtart}) {
     const name = localStorage.getItem('name');
     const sex = localStorage.getItem('sex');
     const age = localStorage.getItem('age');
     const des = localStorage.getItem('des');
     const [profile, setProfile] = useState(true)
     const [notification, setNotification] = useState(false)
+    const [t,sett] = useState(false)
+    const [h, seth] = useState(false)
 
+    // const getData = () =>{
+    //     const article = { id: localStorage.getItem('id') };
+    //     axios.post('http://localhost:1000/listWaiting', article)
+    //         .then(response => setDataListWaiting(response.data));
+    //     console.log(dataListWaiting)
+    // }
     const clickToProfile = () =>{
         setProfile(true);
         setNotification(false);
@@ -24,12 +34,8 @@ function Menu1({changeProfile}) {
     return (
     <div className='menu'>
         <NavbarMenu profile={clickToProfile} notification={clickToNotification}/>
-        <div className={profile ? 'active__profile' : 'nonactive__profile'}>
-            <Profile changeProfile={changeProfile} name={name} sex={sex} age={age} des={des}/>
-        </div>
-        <div className={notification ? 'active__notification' : 'nonactive__notification'}>
-            <Notification/>
-        </div>
+        {profile ? (<div className={'active__profile'}><Profile activeChangeAvtart={activeChangeAvtart} image={image} changeProfile={changeProfile} name={name} sex={sex} age={age} des={des}/></div>) : (<></>)}
+        {notification ? (<div className={'active__notification'}><Notification/></div>) : (<></>)}
     </div>
     )
 }

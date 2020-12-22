@@ -3,10 +3,10 @@
     display: block;
     margin-top: 10vh;
 }
-.bt__swipeButtons__star{
+.bbt__swipeButtons__star{
     color: #62b4f9 !important;
 }
-.bt__swipeButtons__star h2{
+.bbt__swipeButtons__star h2{
     font-size: small;
     font-family: 'Open Sans', sans-serif;
 }
@@ -26,7 +26,7 @@
 .infoSetting__changeInfo div{
     padding-bottom: 2px;
 }
-.bt{
+.bbt{
     display: flex;
     padding-top: 40px;
     justify-content: center;

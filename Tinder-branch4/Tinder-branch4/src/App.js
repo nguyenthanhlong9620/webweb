@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import NavbarMenu from './components/userinterface/NavbarMenu';
 import User from './components/pages/User';
 import InfoSetting from './components/userinterface/InfoSetting';
+import Test from './test';
 
 const id = localStorage.getItem('id');
 
@@ -19,6 +20,7 @@ function App() {
           <Route path='/' exact component={Home}/>
           <Route path='/user' exact component={User}/>
           <Route path='/infoSetting' exact component={InfoSetting}/>
+          <Route path='/test' exact component={Test}/>
         </Switch>
       </Router>
     </>

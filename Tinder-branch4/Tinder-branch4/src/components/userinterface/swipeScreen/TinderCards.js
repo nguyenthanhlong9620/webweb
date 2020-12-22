@@ -40,8 +40,11 @@ import axios from 'axios';
 //             .then(response => {return response.data});
 //     return 0    
 // }
+// db = {
+//   {id: xxx ...},{id: yyy ...},{id zzz ...}
+// }
 
-function TinderCards ({profile,dataListUser}) {
+function TinderCards ({dataListUser}) {
   const db = dataListUser
   const alredyRemoved = []
   let charactersState = db
@@ -74,10 +77,16 @@ function TinderCards ({profile,dataListUser}) {
 // }
 
 
-  const swiped = (direction, nameToDelete) => {
+  const swiped = (direction, nameToDelete, id) => {
     console.log(nameToDelete + ' ' + direction)
     setLastDirection(direction)
     alredyRemoved.push(nameToDelete)
+    if(direction == 'right' || direction == 'up'){
+      const article = { userLogin_id: localStorage.getItem('id'), resUser_id: id };
+        axios.post('http://localhost:1000/matchReact', article)
+            .then(response => console.log(response));
+            console.log(localStorage.getItem('id') + 'da thich' + id)
+    }
   }
 
   const outOfFrame = (name) => {
@@ -87,26 +96,33 @@ function TinderCards ({profile,dataListUser}) {
   }
 
   const swipe = (dir) => {
-    const cardsLeft = characters.filter(person => !alredyRemoved.includes(person.name))
+    try {
+      const cardsLeft = characters.filter(person => !alredyRemoved.includes(person.name))
     if (cardsLeft.length) {
       const toBeRemoved = cardsLeft[cardsLeft.length - 1].name // Find the card object to be removed
       const index = db.map(person => person.name).indexOf(toBeRemoved) // Find the index of which to make the reference to
       childRefs[index].current.swipe(dir) // Swipe the card!
     }
+      
+    } catch (error) {
+      console.log(error)
+    }
   }
-
-
     return (
         <div>
+          {console.log(db)}
             <div className="tinderCards__cardContainer">
             {characters.map((character, index) =>(
+              <>
                     <TinderCard
                         ref={childRefs[index]}
+
                         className='swipe'
                         key={character.name}
-                        onSwipe={(dir) => swiped(dir, character.name)}
+                        onSwipe={(dir) => swiped(dir, character.name, character.user_id)}
                         onCardLeftScreen={() => outOfFrame(character.name)}>
-                        <div style={{backgroundImage: `url(${character.url})`}}
+                        {/* <div style={{backgroundImage: `url(${character.url})`}} */}
+                        <div style={{backgroundImage: `url(${character.file_name})` }}
                         className='card'
                     >
                             <div className='info'>
@@ -114,13 +130,13 @@ function TinderCards ({profile,dataListUser}) {
                             </div>
                         </div>
                     </TinderCard>
+                    <SwipeButtonBar
+                    left={() => swipe('left')}
+                    right={() => swipe('right')}
+                    db = {character}
+                    />
+              </>
                 ))}
-            <SwipeButtonBar
-                left={() => swipe('left')}
-                right={() => swipe('right')}
-                star={() => swipe('up')}
-                profile={profile}
-                />
                 {/* <button onClick={handleSubmit}>click</button> */}
             </div>
         </div>

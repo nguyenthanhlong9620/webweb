@@ -4,6 +4,7 @@ const login = (userId) => {
 
 const logout = () => {
     localStorage.removeItem("id");
+    localStorage.removeItem("profileId");
     window.location.replace("/");
 }
 

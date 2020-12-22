@@ -20,6 +20,10 @@
 }
 .CardNotifi__info{
     display: flex;
+    max-width: 14vw;
+}
+.CardNotifi__button{
+
 }
 .CardNotifi__details{
     flex: 1;
@@ -35,4 +39,10 @@
 .CardNotifi__image{
     margin-right: px;
     align-self: center;
+}
+.CardNotifi__superLike{
+    color: #62b4f9 !important;
+}
+.CardNotifi__CloseIcon{
+    color: #ec5e6f !important;
 }

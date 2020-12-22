@@ -13,10 +13,15 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import axios from 'axios';
+import {storage} from '../../../firebase'
 
+let l = 0;
 var today = new Date();
 var nowYear = today.getFullYear();
 const useStyles = makeStyles((theme) => ({
+    rp: {
+        width: theme.spacing(40),
+    },
     formControl: {
         minWidth: 120,
     },
@@ -46,6 +51,7 @@ function FriendProfile({ unProfile }) {
     const [age, setAge] = useState(localStorage.getItem('age'));
     const [sex, setSex] = useState(localStorage.getItem('sex'));
     const [like, setLike] = useState(localStorage.getItem('like'));
+    const [ct, setCt] = useState('');
 
     const toMain = () => {
         setMain(true);
@@ -80,7 +86,7 @@ function FriendProfile({ unProfile }) {
           setchInfo(false);
 
           localStorage.setItem("name", name);
-          localStorage.setItem("age", age);
+          localStorage.setItem("age", nowYear - birthday.substr(0, 4));
           localStorage.setItem("sex", sex);
           localStorage.setItem("des", des);
           localStorage.setItem("like", like);
@@ -94,7 +100,7 @@ function FriendProfile({ unProfile }) {
             data: {
               user_id: localStorage.getItem('id'),
               name: name,
-              age: age,
+              age: nowYear - birthday.substr(0, 4),
               sex: sex,
               description: des,
               partner_sexual_type: like,
@@ -131,12 +137,39 @@ function FriendProfile({ unProfile }) {
         unProfile();
     }
 
-    const fileUploadButton = () => {
-        document.getElementById('fileButton').click();
-        document.getElementById('fileButton').onchange = () => {
-            setImgUpload(document.getElementById('fileButton').value)
-        }
-        img.push({ imgUpload });
+    const [image, setImage] = useState(null);
+    const [url, setUrl] = useState("");
+  
+    const handleChange = e => {
+      if (e.target.files[0]) {
+        setImage(e.target.files[0]);
+        console.log(e.target.files[0])
+      }
+    }
+
+    const pushImgtoDb = () =>{
+            const article = {user_id: localStorage.getItem('id'), photo_name: url, content: ct};
+            axios.post('http://localhost:1000/uploadImage_Post', article)
+            document.location.reload()
+    }
+  
+    const handleUpload = () => {
+      const uploadTask = storage.ref(`images/${image.name}`).put(image);
+      uploadTask.on(
+        error => {
+          console.log(error);
+        },
+        () => {
+          storage
+            .ref("images")
+            .child(image.name)
+            .getDownloadURL()
+            .then(url => {
+                //pushImgtoDb(url)
+                setUrl(url)
+            });
+        },
+      );
     }
 
     return (
@@ -150,15 +183,9 @@ function FriendProfile({ unProfile }) {
                 {main && <>
                     <div className='profile__infomation'>
                         <div className='profile__img'>
-                            <IconButton className="nextButton" onClick={nextImgLeft}>
-                                <ChevronLeftIcon fontSize='large' />
-                            </IconButton>
                             <div className='profile__avatar'>
                                 <Avatar variant="rounded" className={classes.img} src={avatar} />
                             </div>
-                            <IconButton className="nextButton" onClick={nextImgRight}>
-                                <ChevronRightIcon fontSize='large' />
-                            </IconButton>
                         </div>
                         <h2>{name}</h2>
                         <p>{sex}, {age} years old</p>
@@ -179,24 +206,35 @@ function FriendProfile({ unProfile }) {
                             Edit Photo
                     </div>
                         <div className='changePhotos'>
-                            {img.map((img, index) => (
-                                <div>
-                                    <Avatar ref={childRefs[index]} variant="rounded" className={classes.photo} src={img} />
-                                </div>
-                            ))}
+                        <TextField
+                                    className={classes.rp}
+                                    label="Content"
+                                    multiline
+                                    rows={18}
+                                    defaultValue="Default Value"
+                                    variant="outlined"
+                                    defaultValue={''}
+                                    onChange={(event) => setCt(event.target.value)}
+                                />
                         </div>
                         <div className="changePhoto__button">
                             <Button className="profile__swipeButtons__left" onClick={toMain}>
                                 <h2>Cancel</h2>
                             </Button>
                             <div>
-                                <input id="fileButton" type="file" accept="image/*" hidden />
-                                <Button className="profile__swipeButtons__star" onClick={fileUploadButton}>
+                                {/* <input type="file" accept="image/*" hidden/>
+                                <Button className="profile__swipeButtons__star">
+                                    <h2>Upload Photos</h2>
+                                </Button> */}
+                                <input type="file" onChange={handleChange} />
+                                <Button className="profile__swipeButtons__star" onClick={handleUpload}>
                                     <h2>Upload Photos</h2>
                                 </Button>
-                                {imgUpload}
+                                {/* <Button className="profile__swipeButtons__star" onClick={pushImgtoDb}>
+                                    <h2>xxx</h2>
+                                </Button> */}
                             </div>
-                            <Button className="profile__swipeButtons__star" onClick={toMain}>
+                            <Button className="profile__swipeButtons__star" onClick={pushImgtoDb}>
                                 <h2>Done</h2>
                             </Button>
                         </div>
@@ -216,7 +254,7 @@ function FriendProfile({ unProfile }) {
                                     <Select
                                         labelId="demo-controlled-open-select-label"
                                         id="demo-controlled-open-select"
-                                        defaultValue={'male'}
+                                        defaultValue={sex}
                                         onChange={(event) => setSex(event.target.value)}
                                     >
                                         <MenuItem value={'male'}>Male</MenuItem>
@@ -231,7 +269,7 @@ function FriendProfile({ unProfile }) {
                                     <Select
                                         labelId="demo-controlled-open-select-label"
                                         id="demo-controlled-open-select"
-                                        defaultValue={'female'}
+                                        defaultValue={like}
                                         onChange={(event) => setLike(event.target.value)}
                                     >
                                         <MenuItem value={'male'}>Male</MenuItem>

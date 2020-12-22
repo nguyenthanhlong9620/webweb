@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Profile({changeProfile, name, sex, age, des}) {
+function Profile({changeProfile, name, sex, age, des, image, activeChangeAvtart}) {
   const classes = useStyles();
   const logout = useCallback(() => {
     auth.logout();
@@ -42,7 +42,7 @@ function Profile({changeProfile, name, sex, age, des}) {
             }}
             badgeContent={<SmallAvatar/>}
         >
-            <Avatar className={classes.large} src='https://scontent.fhph1-1.fna.fbcdn.net/v/t1.0-9/95569662_1105829716451378_5436510620490924032_o.jpg?_nc_cat=111&ccb=2&_nc_sid=174925&_nc_ohc=pHjjLfHV1swAX_iIA5M&_nc_ht=scontent.fhph1-1.fna&oh=218ed06ae1be8376bbef20a3c78162d0&oe=5FD48909'/>
+            <Avatar className={classes.large} src={image} onClick={activeChangeAvtart}/>
         </Badge>
             </div>
             <div>
