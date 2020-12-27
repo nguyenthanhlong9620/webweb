@@ -5,6 +5,7 @@ import Badge from '@material-ui/core/Badge';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import './Profile.css';
 import auth from "../../../auth";
+import { Button } from '@material-ui/core';
   
   const SmallAvatar = withStyles((theme) => ({
     root: {
@@ -22,19 +23,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Profile({changeProfile, name, sex, age, des, image, activeChangeAvtart}) {
+function Profile({changeProfile, name, sex, age, des, image, activeChangeAvtart, activeWall}) {
+  const db = [{
+    user_id: localStorage.getItem('id'),
+    age: localStorage.getItem('age'),
+    sex: localStorage.getItem('sex'),
+    description: localStorage.getItem('des'),
+    name:localStorage.getItem('name'),
+    file_name: image  
+  }]
   const classes = useStyles();
   const logout = useCallback(() => {
     auth.logout();
   }, []);
-
+  const clickToName = () =>{
+    activeWall(db[0])
+  }
   
+  localStorage.setItem('avatar' , image)
 
   return (
     <>
         <div className='profile'>
-            <div className='avatar'>
-            <Badge
+        <div className='avatar'>
+          <Badge
             overlap="circle"
             anchorOrigin={{
             vertical: 'bottom',
@@ -43,10 +55,11 @@ function Profile({changeProfile, name, sex, age, des, image, activeChangeAvtart}
             badgeContent={<SmallAvatar/>}
         >
             <Avatar className={classes.large} src={image} onClick={activeChangeAvtart}/>
-        </Badge>
+          </Badge>
+            
             </div>
             <div>
-                <h2>{name}</h2>
+                <h2 className='tWall' onClick={clickToName}>{name}</h2>
                 <p>{sex}, {age} years old</p>
                 <p>{des}</p>
             </div>

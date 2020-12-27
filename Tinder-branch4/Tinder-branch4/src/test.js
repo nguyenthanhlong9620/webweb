@@ -1,13 +1,4 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Navbar from './components/Navbar';
-import { BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
-import Home from './components/pages/Home'
-import Footer from './components/Footer';
-import NavbarMenu from './components/userinterface/NavbarMenu';
-import User from './components/pages/User';
-import InfoSetting from './components/userinterface/InfoSetting';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 

@@ -85,9 +85,6 @@ function ChangeAvatar(unActiveChangeAvtart) {
                                 <Avatar variant="rounded" className={classes.img} src={url} />
                             </div>
                         </div>
-                        <h2></h2>
-                        <p> years old</p>
-                        <p></p>
                     </div>
                     <div className="profile__swipeButtons">
                     <input type="file" onChange={handleChange} />

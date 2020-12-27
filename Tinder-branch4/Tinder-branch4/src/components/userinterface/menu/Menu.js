@@ -5,7 +5,7 @@ import NavbarMenu from '../NavbarMenu';
 import Match from './Match';
 import Like from './Like';
 
-function Menu({activeScreenChat}) {
+function Menu({activeScreenChat, activeWall}) {
     const [messege, setMessege] = useState(false)
     const [match, setMatch] = useState(true)
     const [like, setLike] = useState(false)
@@ -36,7 +36,7 @@ function Menu({activeScreenChat}) {
             <Like/>
         </div>
         <div className={match ? 'active__match' : 'nonactive__match'}>
-            <Match/>
+            <Match activeWall = {activeWall} activeScreenChat = {activeScreenChat}/>
         </div>
     </div>
     )

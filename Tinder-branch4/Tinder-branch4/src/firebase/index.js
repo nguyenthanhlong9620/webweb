@@ -1,5 +1,6 @@
 import firebase from "firebase/app"
 import "firebase/storage";
+import "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDV11QUlUoP96ZuW46w3mxyxxzhEAR_aIs",
@@ -13,25 +14,6 @@ const firebaseConfig = {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   const storage = firebase.storage();
+  const firestore = firebase.firestore();
 
-  export {storage, firebase as default};
-
-//   const handleUpload = () => {
-//     const uploadTask = storage.ref(`images/${image.name}`).put(image);
-//     uploadTask.on(
-//       error => {
-//         console.log(error);
-//       },
-//       () => {
-//         storage
-//           .ref("images")
-//           .child(image.name)
-//           .getDownloadURL()
-//           .then(url => {
-//             setUrl(url)
-//           });
-//       },
-//       img.push(url),
-//       console.log(url)
-//     );
-//   };
+  export {storage, firestore , firebase as default};

@@ -5,8 +5,10 @@ import Profile from './Profile';
 import Notification from './Notification';
 import ChangeAvatar from './ChangeAvatar';
 import axios from 'axios';
+import VolumeDownIcon from '@material-ui/icons/VolumeDown';
 
-function Menu1({changeProfile, image, activeChangeAvtart}) {
+
+function Menu1({changeProfile, image, activeChangeAvtart, activeWall}) {
     const name = localStorage.getItem('name');
     const sex = localStorage.getItem('sex');
     const age = localStorage.getItem('age');
@@ -34,7 +36,7 @@ function Menu1({changeProfile, image, activeChangeAvtart}) {
     return (
     <div className='menu'>
         <NavbarMenu profile={clickToProfile} notification={clickToNotification}/>
-        {profile ? (<div className={'active__profile'}><Profile activeChangeAvtart={activeChangeAvtart} image={image} changeProfile={changeProfile} name={name} sex={sex} age={age} des={des}/></div>) : (<></>)}
+        {profile ? (<div className={'active__profile'}><Profile activeWall={activeWall} activeChangeAvtart={activeChangeAvtart} image={image} changeProfile={changeProfile} name={name} sex={sex} age={age} des={des}/></div>) : (<></>)}
         {notification ? (<div className={'active__notification'}><Notification/></div>) : (<></>)}
     </div>
     )

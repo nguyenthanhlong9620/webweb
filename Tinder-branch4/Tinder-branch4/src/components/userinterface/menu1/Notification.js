@@ -1,8 +1,10 @@
 import React, {useState} from 'react'
 import CardNotifi from './CardNotifi'
 import axios from 'axios'
+import { makeStyles } from '@material-ui/core/styles';
 
 function Notification() {
+    // const classes = useStyles();
     const [dataListWaiting,setDataListWaiting] = useState([])
     const [x,sx] = useState(true)
     // if(listWaiting){
@@ -20,6 +22,21 @@ function Notification() {
     //         <></>
     //     )
     // }
+
+    // const useStyles = makeStyles((theme) => ({
+    //     mt: {
+    //         textAlign: 'center',
+    //         marginTop: '32vh',
+    //         display: 'block',
+    //         color: '#DDDDDD',
+    //         fontSize : 40
+    //     },
+    // }));
+
+
+
+
+
 
     const getData = () =>{
         const article = { id: localStorage.getItem('id') };
@@ -45,22 +62,11 @@ function Notification() {
 
     return(
         <>
-        {/* <div>dung buon</div>
-        <div>
-            <div onClick={console.log('buon')}>
-                Edit
-            </div>
-        </div>
-        <div>
-            <div onClick={console.log('buon lan 2')}>
-                Edit
-            </div>
-        </div> */}
-
         {/* <CardNotifi name={'đcmmmm'} id__={'22'}/> */}
             {dataListWaiting ? (<div>{dataListWaiting.map((l) => (<CardNotifi name={l.name} req_id={l.user_id} profilePic={l.file_name}/>))}</div>):(<></>)}
         </>
     )
+    // return(<div className={classes.mt}>You Don't Have Notification</div>)
 }
 
 export default Notification

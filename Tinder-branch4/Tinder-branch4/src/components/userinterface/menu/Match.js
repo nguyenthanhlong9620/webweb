@@ -3,7 +3,7 @@ import React,{useState} from 'react';
 import axios from 'axios'
 import CardFriend from './CardFriend';
 
-function Match() {
+function Match({activeWall, activeScreenChat}) {
     const [dataMatch,setDataMatch] = useState([])
     const [x,sx] = useState(true)
     // if(listWaiting){
@@ -34,7 +34,7 @@ function Match() {
     }
     return (
         <div>
-            {dataMatch ? (<>{dataMatch.map((l) => (<CardFriend id={l.user_id} name={l.name} info={l.des} profilePic={l.file_name} active='1'/>))}</>):(<></>)}
+            {dataMatch ? (<>{dataMatch.map((l) => (<CardFriend activeScreenChat={activeScreenChat} db={l} id={l.user_id} sex={l.sex} age={l.age} name={l.name} info={l.description} profilePic={l.file_name} active='1' activeWall={activeWall}/>))}</>):(<></>)}
         </div>
     )
 }

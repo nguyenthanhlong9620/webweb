@@ -1,0 +1,71 @@
+.wc__bg{
+    background: linear-gradient(45deg, #6bd4fe 30%, #88fcfc 90%);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+.wc__ct{
+    justify-content: center;
+    padding-top: 38vh;
+    color: white;
+    font-size: 5vh;
+    user-select: none;
+    text-transform: uppercase;
+}
+.wc__bt{
+    border: none;
+    outline: none;
+    width: 20vh;
+    height: 6vh;
+    border-radius: 20px;
+    color: #6bd4fe;
+    font-size: 3vh;
+    background-color: white;
+}
+.wc__bt:hover{
+    cursor: pointer;
+    border: 2px solid white;
+    background: transparent;
+    color: white;
+}
+.wc__ip{
+    border: none;
+    outline: none;
+    width: 30vh;
+    height: 6vh;
+    border-radius: 20px;
+    color: #6bd4fe;
+    text-transform: uppercase;
+    text-align: center;
+}
+.wc__{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.wc__bt1{
+    border: none;
+    outline: none;
+    width: 20vh;
+    height: 6vh;
+    border-radius: 20px;
+    color: #6bd4fe;
+    font-size: 3vh;
+    background-color: white;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.wc__bt1:hover{
+    cursor: pointer;
+    border: 2px solid white;
+    background: transparent;
+    color: white;
+}

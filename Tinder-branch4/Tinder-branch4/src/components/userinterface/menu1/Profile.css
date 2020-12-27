@@ -27,3 +27,7 @@
     color: gray;
     font-family: 'Open Sans', sans-serif;
 }
+.tWall:hover{
+    cursor: pointer;
+    color: #6bd4fe;
+}

@@ -200,7 +200,6 @@ router.post('/acceptReact', (req, res, next) => {
 
 // list friends
 router.post('/listFriendsReact', (req, res, next) => {
-    
     pool.query(`SELECT * from profile 
                             INNER JOIN photo ON profile.id = photo.profile_id
                             INNER JOIN match_couple on profile.user_id = match_couple.req_user_id 
@@ -366,6 +365,99 @@ router.post('/uploadImage_Post', (req, res, next) => {
 // return imagePost
 router.post('/returnImage_Post', (req, res, next) => {
     pool.query(`Select *  FROM post where post.user_id = ${req.body.user_id}`, function (err, result) {
+                    if (err) throw err;
+                    return res.json(result);
+    }); 
+});
+
+// return amount user
+router.post('/amount_User', (req, res, next) => {
+    pool.query(`Select *  FROM profile
+                            join user
+                            on profile.user_id = user.id `, function (err, result) {
+        if (err) throw err;
+        return res.json(result)
+    });
+});
+
+// return list_matched
+router.post('/amount_matched_couple', (req, res, next) => {
+    pool.query(`Select *  FROM match_couple where match_couple.status = 1`, function (err, result) {
+                    if (err) throw err;
+                    return res.json(result);
+    }); 
+});
+
+
+// return amount_reported
+router.post('/amount_report', (req, res, next) => {
+    pool.query(`Select *  FROM profile
+                               join report
+                               on profile.user_id = report.reported_user_id
+                               `, function (err, result) {
+        if (err) throw err;
+        return res.json(result)
+    });
+});
+
+
+// return black_list
+router.post('/amount_blackList', (req, res, next) => {
+    pool.query(`Select *  FROM black_list`, function (err, result) {
+                    if (err) throw err;
+                    return res.json(result);
+    }); 
+});
+
+// post 
+router.post('/list_post', (req, res, next) => {
+    pool.query(`Select *  FROM post where post.user_id = ${req.body.user_id}
+                      ORDER BY post.updatedAt DESC`, function (err, result) {
+                    if (err) throw err;
+                    return res.json(result);
+    }); 
+});
+
+// all Post for admin page 
+router.post('/all_post', (req, res, next) => {
+    pool.query(`Select *  FROM post join profile
+                          where post.user_id = profile.user_id
+                          ORDER BY post.updatedAt DESC`, function (err, result) {
+                    if (err) throw err;
+                    return res.json(result);
+    }); 
+});
+
+// delete post 
+router.post('/delete_post', (req, res, next) => {
+    pool.query(`DELETE FROM post where post.id_post = ${req.body.id_post}`, function (err, result) {
+                    if (err) throw err;
+                    return res.json("Oke");
+    }); 
+});
+
+// update post 
+router.post('/update_post', (req, res, next) => {
+    pool.query(`update post set post.content = '${req.body.content}'
+                            where post.id_post = ${req.body.id_post}`, function (err, result) {
+                    if (err) throw err;
+                    return res.json("Oke");
+    }); 
+});
+
+// creat message
+router.post('/create_message', (req, res, next) => {
+    pool.query(`INSERT INTO message (req_user, res_user) VALUES 
+                            ('${req.body.req_user}', '${req.body.res_user}')`, function (err, result) {
+                    if (err) throw err;
+                    res.send('ok')
+    }); 
+});
+
+// get message 
+router.post('/get_message', (req, res, next) => {
+    pool.query(`Select *  FROM message
+                          where req_user = ${req.body.req_user}`, function (err, result) {
                     if (err) throw err;
                     return res.json(result);
     }); 

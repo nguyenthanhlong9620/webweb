@@ -12,9 +12,10 @@ import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom';
 import auth from "../../auth";
 import axios from 'axios';
 import StartButton from '../userinterface/swipeScreen/StartButton';
-import Hope from '../userinterface/swipeScreen/Hope'
-import Trust from '../userinterface/swipeScreen/Trust'
-import ChangeAvatar from '../userinterface/menu1/ChangeAvatar'
+import Hope from '../userinterface/swipeScreen/Hope';
+import Trust from '../userinterface/swipeScreen/Trust';
+import ChangeAvatar from '../userinterface/menu1/ChangeAvatar';
+import Wall from '../userinterface/wall/Wall'
 
 function User({ location }) {
     const [dataListUser, setDataListUser] = useState([])
@@ -30,22 +31,12 @@ function User({ location }) {
     const [h, seth] = useState(false)
     const [t, sett] = useState(false)
     const [changeAvatar, setchangeAvatar] = useState(false);
-
+    const [wall, setWall] = useState(false)
+    const [dbWall, setdbWall] = useState([])
+    const [dbm, setdbm] = useState([])
+    const [xx,sxx] = useState(false)
 
     const handleSubmit = () => {
-        //   event.preventDefault();
-        //   const dataList = await
-        //   axios({
-        //     method: 'post',
-        //     url: 'http://localhost:1000/listUser',
-        //     data: {
-        //       id: '41'
-        //     }
-        //   });
-        // //   localStorage.setItem('listCardTinder', dataList)
-        // //   console.log('list' + localStorage.getItem('listCardTinder'))
-        // setDataListUser(dataList.data)
-        // console.log(dataList.data)
         const article = { user_id: localStorage.getItem('id') };
         axios.post('http://localhost:1000/testt', article)
             .then(response => setDataListUser(response.data));
@@ -63,21 +54,37 @@ function User({ location }) {
         setChangeProfile(false);
     }
 
-    const activeScreenChat = (a, b) => {
+    const activeScreenChat = (a , id1) => {
+        setdbm(id1)
         setName(a)
-        setStatus(b)
         setScreenChat(true);
         setCard(false);
         setBt(false)
+        setWall(false)
     }
+
     const unActiveScreenChat = () => {
         setScreenChat(false)
         setBt(true)
+        setWall(false)
+    }
+
+    const activeWall = (db) => {
+        setdbWall(db)
+        setScreenChat(false);
+        setCard(false);
+        setBt(false)
+        setWall(true)
+    }
+    const unActiveWall = () => {
+        setScreenChat(false)
+        setCard(false);
+        setBt(true)
+        setWall(false)
     }
 
     const activeChangeAvtart = () =>{
         setchangeAvatar(true)
-
     }
 
     const unActiveChangeAvtart = () =>{
@@ -117,6 +124,7 @@ function User({ location }) {
         console.log(localStorage.getItem("profileId"))
         sx(false)
     }
+
     try {
         return (
             <>
@@ -128,16 +136,17 @@ function User({ location }) {
                 <UserInterfaceHeader />
                 <div className='userDisplay'>
                     <div className='Menu'>
-                        <Menu activeScreenChat={activeScreenChat} />
+                        <Menu activeScreenChat={activeScreenChat} activeWall={activeWall}/> 
                     </div>
                     <div className='swipeDisplay'>
                         {t ? (<Trust click={trustt} />) : (<></>)}
                         {card ? (<TinderCards dataListUser={dataListUser} />) : (<></>)}
-                        {screenChat ? (<ScreenChat unActiveScreenChat={unActiveScreenChat} name={name} status={status} />) : (<></>)}
+                        {screenChat ? (<ScreenChat unActiveScreenChat={unActiveScreenChat} dbm={dbm} name={name} status={status} />) : (<></>)}
+                        {wall && <Wall unActiveWall={unActiveWall} db={dbWall}/>}
                         {h ? (<Hope click={hopeeee} />) : (<></>)}
                         {bt ? (<StartButton click={handleSubmit} />) : (<></>)}
                     </div>
-                    {img ? (<div className='Menu'><Menu1 activeChangeAvtart ={activeChangeAvtart} changeProfile={activeChangeProfile} image={img[img.length - 1].file_name}/></div>) : (<></>)}
+                    {img ? (<div className='Menu'><Menu1 activeWall={activeWall} activeChangeAvtart ={activeChangeAvtart} changeProfile={activeChangeProfile} image={img[img.length - 1].file_name}/></div>) : (<></>)}
                 </div>
             </>
         )
@@ -148,19 +157,21 @@ function User({ location }) {
                     {uid ? <Redirect to={`/user?id=${uid}`} /> : <Redirect to="/" />}
                 </Route>
                 {changeProfile && <ChangeProfile unProfile={unactiveChangeProfile} />}
+                {changeAvatar&& <ChangeAvatar unActiveChangeAvtart={unActiveChangeAvtart}/>}
                 <UserInterfaceHeader />
                 <div className='userDisplay'>
                     <div className='Menu'>
-                        <Menu activeScreenChat={activeScreenChat} />
+                    <Menu activeScreenChat={activeScreenChat} activeWall={activeWall}/> 
                     </div>
                     <div className='swipeDisplay'>
                         {t ? (<Trust click={trustt} />) : (<></>)}
                         {card ? (<TinderCards dataListUser={dataListUser} />) : (<></>)}
-                        {screenChat ? (<ScreenChat unActiveScreenChat={unActiveScreenChat} name={name} status={status} />) : (<></>)}
+                        {screenChat ? (<ScreenChat unActiveScreenChat={unActiveScreenChat} dbm={dbm} name={name} status={status} />) : (<></>)}
+                        {wall && <Wall unActiveWall={unActiveWall} db={dbWall}/>}
                         {h ? (<Hope click={hopeeee} />) : (<></>)}
                         {bt ? (<StartButton click={handleSubmit} />) : (<></>)}
                     </div>
-                    {img ? (<div className='Menu'><Menu1 changeProfile={activeChangeProfile} image={''}/></div>) : (<></>)}
+                    {img ? (<div className='Menu'><Menu1 activeWall={activeWall} activeChangeAvtart ={activeChangeAvtart} changeProfile={activeChangeProfile} image={''}/></div>) : (<></>)}
                 </div>
             </>
         )

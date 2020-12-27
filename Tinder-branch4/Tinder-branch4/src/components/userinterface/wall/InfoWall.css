@@ -1,0 +1,29 @@
+.ifw__ctn{
+    width: 50vw;
+    height: 20vh;
+    background: #2b6f8a56;
+    border-radius: 4px;
+    box-shadow: 10px 10px 30px 30px #2b6f8a56;
+    color: rgb(83, 83, 83);
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+.ifw__ct{
+    background-color: rgb(245, 247, 250);
+    width: 50vw;
+    height: 40vh;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    color: rgb(83, 83, 83);
+}
+.ifw__ct p{
+    color: gray;
+    font-family: 'Open Sans', sans-serif;
+}
+.ifw__avatar{
+    
+}

@@ -1,0 +1,39 @@
+.wall{
+    display: flex;
+    justify-content: center;
+}
+.wall__info{
+    display: flex;
+    justify-content: center;
+}
+.box__hr{
+    padding-top: 1vh;
+    height: 1vh;
+    display: flex;
+    justify-content: center;
+}
+.box__hr div{
+    padding-left: 10px;
+    background-color: rgb(228, 228, 228);
+    height: 0.5px;
+    width: 42vw;
+}
+.box__post{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px 0 20px;
+    height: 6vh;
+    margin-left: 10vw;
+    margin-right: 10vw;
+}
+.box__post__bt{
+    color: rgb(139, 139, 139) !important;
+}
+.box__post__brt{
+    color: lightgray !important;
+}
+.wall__back{
+    height: 10vh;
+    z-index: 3;
+    color: rgba(0, 0, 0, 0.473) !important;
+}
