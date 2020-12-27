@@ -75,7 +75,7 @@
 }
 .changePhotos{
     padding-top: 10px ;
-    padding-left: 34px;
+    padding-left: 4.5vw;
     display: grid;
     grid-template-columns: auto auto auto;
     height: 360px;

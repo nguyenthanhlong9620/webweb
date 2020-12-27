@@ -17,7 +17,7 @@ import Logo from './Logo';
 import axios from 'axios';
 import User from './pages/User';
 import { useHistory } from 'react-router-dom';
-
+import { firestore } from '../firebase';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -76,7 +76,6 @@ export default function SignIn({clickToSignUp,clickToForgot}) {
           localStorage.setItem('profileId',dataSignIn.data.id);
 
 
-
           history.push(`/user?id=${dataSignIn.data.user_id}`);
         } else {
           localStorage.setItem('id',dataSignIn.data);
@@ -88,8 +87,6 @@ export default function SignIn({clickToSignUp,clickToForgot}) {
       }
     }
   } 
-    
-
 
   // useEffect(() => {
   //   handleSubmit()
@@ -195,11 +192,6 @@ export default function SignIn({clickToSignUp,clickToForgot}) {
               Sign In
             </Button>
           <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2" onClick={clickToForgot}>
-                Forgot password?
-              </Link>
-            </Grid>
             <Grid item>
               <Link href='#' variant="body2" onClick={clickToSignUp}>
                 Don't have an account? Sign Up

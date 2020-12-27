@@ -5,6 +5,7 @@ import WindowLg from './WindowLg';
 import './WindowLg.css';
 import {Button} from './Button';
 import Logo1 from './Logo1';
+import HeroSection from './HeroSection';
 
 function Navbar() {
     const [click, setClick] = useState(false);
@@ -15,6 +16,25 @@ function Navbar() {
         setLogin(!login);
         window.scrollTo(0, 0);
     }
+    const click_about_us = () =>{
+        window.scrollTo({
+            top: 1550,
+            behavior: 'smooth'
+          })
+    }
+    const click_s = () =>{
+        window.scrollTo({
+            top: 800,
+            behavior: 'smooth'
+          })
+    }
+    const click_sx = () =>{
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          })
+    }
+
 
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
@@ -45,30 +65,30 @@ function Navbar() {
                     </div>
                     <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                         <li className='nav-item'>
-                            <Link to='/' className='nav-links' onClick={closeMobileMenu}>
+                            <Link to='/' className='nav-links' onClick={click_sx}>
                                 Home
                             </Link>
                         </li>
                         <li className='nav-item'>
-                            <Link to='/services' className='nav-links' onClick={closeMobileMenu}>
+                            <Link to='/' className='nav-links' onClick={click_s}>
                                 Services
                             </Link>
                         </li>
                         <li className='nav-item'>
-                            <Link to='/products' className='nav-links' onClick={closeMobileMenu}>
-                                Products
+                            <Link to='/' className='nav-links' onClick={click_about_us}>
+                                About Us
                             </Link>
                         </li>
                         <li>
-                            <Link to='/sign-up' className='nav-links-mobile' onClick={closeMobileMenu}>
+                            <Link to='/' className='nav-links-mobile' onClick={closeMobileMenu}>
                                 Sign In
                             </Link>
                         </li>
                     </ul>
-                        {button && <Button className='btns' buttonStyle='btn--outline' buttonSize='btn--large'onClick={loginClick}>SIGN IN</Button>}
                 </div>
             </nav>
                 <WindowLg login={login} close={loginClick}/>
+                <HeroSection signup={loginClick}/>
         </>
     )
 }

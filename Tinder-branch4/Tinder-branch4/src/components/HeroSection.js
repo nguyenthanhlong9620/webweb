@@ -5,7 +5,7 @@ import './HeroSection.css';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
 
 
-function HeroSection() {
+function HeroSection({signup}) {
     return (
         <div className='hero-container'>
             <video src="/videos/video (2).mp4" autoPlay look muted loop />
@@ -16,6 +16,7 @@ function HeroSection() {
                 className='btns'
                 buttonStyle='btn--primary'
                 buttonSize='btn--large'
+                onClick={signup}
                 >
                     GET STARTED
                 </Button>

@@ -60,7 +60,8 @@ function Profile({changeProfile, name, sex, age, des, image, activeChangeAvtart,
             </div>
             <div>
                 <h2 className='tWall' onClick={clickToName}>{name}</h2>
-                <p>{sex}, {age} years old</p>
+                <p>{sex}</p>
+                <p>{age} years old</p>
                 <p>{des}</p>
             </div>
         </div>

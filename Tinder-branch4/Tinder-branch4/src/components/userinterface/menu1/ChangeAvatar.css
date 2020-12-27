@@ -32,10 +32,10 @@
     margin-right: 60px;
 }
 
-.profile__swipeButtons{
+.xxx__swipeButtons{
     display: flex;
     justify-content: center;
-    padding-top: 25px
+    padding-top: 17vh
 }
 .profile__img{
     display: flex;

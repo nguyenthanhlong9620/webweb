@@ -8,14 +8,11 @@ function Footer() {
   return (
     <div className='footer-container'>
       <section className='footer-subscription'>
-        <p className='footer-subscription-heading'>
-          Đăng kí để nhận thông báo mới nhất
-        </p>
         <p className='footer-subscription-text'>
           You can unsubscribe at any time.
         </p>
         <div className='input-areas'>
-          <form>
+          <div>
             <input
               className='footer-input'
               name='email'
@@ -23,14 +20,14 @@ function Footer() {
               placeholder='Your Email'
             />
             <Button buttonStyle='btn--outline'>Subscribe</Button>
-          </form>
+          </div>
         </div>
       </section>
       <div class='footer-links'>
         <div className='footer-link-wrapper'>
           <div class='footer-link-items'>
             <h2>About Us</h2>
-            <Link to='/sign-up'>How it works</Link>
+            <Link to='/'>How it works</Link>
             <Link to='/'>Testimonials</Link>
             <Link to='/'>Careers</Link>
             <Link to='/'>Investors</Link>

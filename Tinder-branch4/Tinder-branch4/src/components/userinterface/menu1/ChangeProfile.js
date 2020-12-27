@@ -14,6 +14,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import axios from 'axios';
 import {storage} from '../../../firebase'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 let l = 0;
 var today = new Date();
@@ -52,6 +53,13 @@ function FriendProfile({ unProfile }) {
     const [sex, setSex] = useState(localStorage.getItem('sex'));
     const [like, setLike] = useState(localStorage.getItem('like'));
     const [ct, setCt] = useState('');
+
+    const [up, setUp] = useState(true)
+    const [loading, setLoading] = useState(false)
+    const [done, setDone] = useState(false)
+
+
+
 
     const toMain = () => {
         setMain(true);
@@ -154,6 +162,8 @@ function FriendProfile({ unProfile }) {
     }
   
     const handleUpload = () => {
+        setLoading(true)
+        setUp(false)
       const uploadTask = storage.ref(`images/${image.name}`).put(image);
       uploadTask.on(
         error => {
@@ -167,6 +177,8 @@ function FriendProfile({ unProfile }) {
             .then(url => {
                 //pushImgtoDb(url)
                 setUrl(url)
+                setLoading(false)
+                setDone(true)
             });
         },
       );
@@ -184,7 +196,7 @@ function FriendProfile({ unProfile }) {
                     <div className='profile__infomation'>
                         <div className='profile__img'>
                             <div className='profile__avatar'>
-                                <Avatar variant="rounded" className={classes.img} src={avatar} />
+                                <Avatar variant="rounded" className={classes.img} src={localStorage.getItem('avatar')} />
                             </div>
                         </div>
                         <h2>{name}</h2>
@@ -210,7 +222,7 @@ function FriendProfile({ unProfile }) {
                                     className={classes.rp}
                                     label="Content"
                                     multiline
-                                    rows={18}
+                                    rows={15}
                                     defaultValue="Default Value"
                                     variant="outlined"
                                     defaultValue={''}
@@ -221,22 +233,17 @@ function FriendProfile({ unProfile }) {
                             <Button className="profile__swipeButtons__left" onClick={toMain}>
                                 <h2>Cancel</h2>
                             </Button>
-                            <div>
                                 {/* <input type="file" accept="image/*" hidden/>
                                 <Button className="profile__swipeButtons__star">
                                     <h2>Upload Photos</h2>
                                 </Button> */}
-                                <input type="file" onChange={handleChange} />
-                                <Button className="profile__swipeButtons__star" onClick={handleUpload}>
-                                    <h2>Upload Photos</h2>
-                                </Button>
-                                {/* <Button className="profile__swipeButtons__star" onClick={pushImgtoDb}>
-                                    <h2>xxx</h2>
-                                </Button> */}
-                            </div>
-                            <Button className="profile__swipeButtons__star" onClick={pushImgtoDb}>
+                                {image?(up&&<Button className="profile__swipeButtons__star" onClick={handleUpload}>
+                                    <h2>Up</h2>
+                            </Button>):(<input type="file" onChange={handleChange} />)}
+                            {loading&&(<CircularProgress/>)}
+                            {done && <Button className="profile__swipeButtons__star" onClick={pushImgtoDb}>
                                 <h2>Done</h2>
-                            </Button>
+                            </Button>}
                         </div>
                     </>}
                 {chInfo &&

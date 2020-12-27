@@ -23,7 +23,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 //     {
 //         name: 'Lisa',
 //         avatar: 'https://headlineplanet.com/home/wp-content/uploads/2019/07/Lisa-Instagram-e1562252580131.jpg',
-//         message: 'Anh có mệt lắm không',
+//         message: 'Anh có mệt lắm không',c
 //     },
 //     {
 //         name: 'Lisa',
@@ -55,7 +55,6 @@ function ScreenChat({ name, unActiveScreenChat, dbm }) {
     const ref1 = firestore.collection('Message').doc(`${dbm.user_id}`).collection(localStorage.getItem('id'));
     const ref2 = firestore.collection('Active');
     const [loanding, setLoanding] = useState(false)
-    const [activeTime, setActiveTime] = useState('');
 
 
     function getDb() {
@@ -68,14 +67,7 @@ function ScreenChat({ name, unActiveScreenChat, dbm }) {
             });
             setDb(items);
             setLoanding(false)
-        })
-            ref2.doc(`${dbm.user_id}`).onSnapshot((sn) => {
-                if (sn.data().active) {
-                        setActiveTime('Active')
-                } else {
-                    setActiveTime(moment(sn.data().lastActive).fromNow())
-                }
-            })  
+        }) 
     }
 
     if(localStorage.getItem('uname') != name){
@@ -143,7 +135,6 @@ function ScreenChat({ name, unActiveScreenChat, dbm }) {
 
                     <div className='name'>
                         <h2>{dbm.name}</h2>
-                        <div>{activeTime}</div>
                     </div>
                     <IconButton className='infor'>
                         <InfoIcon />

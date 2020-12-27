@@ -445,23 +445,60 @@ router.post('/update_post', (req, res, next) => {
     }); 
 });
 
-// creat message
-router.post('/create_message', (req, res, next) => {
-    pool.query(`INSERT INTO message (req_user, res_user) VALUES 
-                            ('${req.body.req_user}', '${req.body.res_user}')`, function (err, result) {
-                    if (err) throw err;
-                    res.send('ok')
+
+// delete user from admin
+router.post('/delete_user', (req, res, next) => {
+    pool.query(`DELETE FROM user where user.id = ${req.body.id}`, function (err, result) {
+        if (err) throw err;
+        return res.json("Oke");
     }); 
 });
 
-// get message 
-router.post('/get_message', (req, res, next) => {
-    pool.query(`Select *  FROM message
-                          where req_user = ${req.body.req_user}`, function (err, result) {
-                    if (err) throw err;
-                    return res.json(result);
+// add matching from admin 
+router.post('/add_matching', (req, res, next) => {
+    pool.query(`INSERT INTO match_couple (req_user_id, res_user_id, status) 
+                VALUES ('${req.body.req_user_id}', '${req.body.res_user_id}', '1')`, function (err, result) {
+        if (err){
+            return res.json("invalid user !!!");
+        }
+        return res.json("Oke");
     }); 
 });
 
+// delete matching from admin
+router.post('/delete_matching', (req, res, next) => {
+    pool.query(`DELETE FROM match_couple where match_couple.req_user_id = ${req.body.req_user_id}
+                and match_couple.res_user_id = ${req.body.res_user_id}
+                or match_couple.req_user_id = ${req.body.res_user_id}
+                and match_couple.res_user_id = ${req.body.req_user_id}`, function (err, result) {
+        if (err) throw err;
+        return res.json("Oke");
+    }); 
+});
+
+// delete report from admin
+router.post('/delete_report', (req, res, next) => {
+    pool.query(`DELETE FROM report where report.id = ${req.body.id}`, function (err, result) {
+        if (err) throw err;
+        return res.json("Oke");
+    }); 
+});
+
+// all admin 
+router.post('/all_admin', (req, res, next) => {
+    pool.query(`SELECT * FROM admin`, function (err, result) {
+        if (err) throw err;
+        return res.json(result);
+    }); 
+});
+
+// login_admin  
+router.post('/login_admin', (req, res, next) => {
+    pool.query(`SELECT * FROM admin where 
+                admin.admin_name = '${req.body.admin_name}'`, function (err, result) {
+        if (err) throw err;
+        return res.json(result);
+    }); 
+});
 
 module.exports = router;

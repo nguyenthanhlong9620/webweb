@@ -50,9 +50,6 @@ function WindowLg({login,close}) {
                     <div className={sign_in ? 'activesignIn' : 'nonActivesignIn'}>
                         <SignIn clickToSignUp={signUpClick} clickToForgot={forgotClick}/>
                     </div>
-                    <div className={forgot ? 'activeforgot' : 'nonActiveforgot'}>
-                        <ForgotPass clickToSignUp={signUpClick} clickToSignIn={signInClick}/>
-                    </div>
                 </div>
             </div>
         </div>

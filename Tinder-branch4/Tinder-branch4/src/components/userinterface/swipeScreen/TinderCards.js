@@ -1,4 +1,4 @@
-import React, {useState,useMemo} from 'react'
+import React, {useState,useMemo, useEffect} from 'react'
 import TinderCard from "react-tinder-card"
 import SwipeButtonBar from './SwipeButtonBar'
 import './TinderCards.css'

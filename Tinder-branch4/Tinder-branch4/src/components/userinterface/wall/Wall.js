@@ -68,7 +68,7 @@ function Wall({unActiveWall, db}) {
     window.addEventListener('resize', sizeCalculation);
     return (
         <>
-         {change && <Change id={changeId}/>}
+         {change && <Change id={changeId} unChange={unChange}/>}
         <Scrollbars style={{ width: widthBox, height: heightBox }}>
             <Button className='wall__back' onClick={unActiveWall}>
                     <ArrowBackIosIcon/>

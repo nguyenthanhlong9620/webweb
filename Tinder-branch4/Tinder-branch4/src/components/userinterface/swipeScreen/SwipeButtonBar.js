@@ -47,11 +47,7 @@ function SwipeButtonBar({left, right, db}) {
             </IconButton>
             <IconButton className="ReportProblemIcon" onClick = {activeReport}>
                 <ReportProblemIcon fontSize='large'/>
-            </IconButton>
-            <IconButton className="BlockIcon">
-                <BlockIcon fontSize='large'/>
-            </IconButton>
-            <IconButton className="swipeButtons__lightning" onClick={activeProfile}>
+            </IconButton>            <IconButton className="swipeButtons__lightning" onClick={activeProfile}>
                 <MoreHorizIcon fontSize='large'/>
             </IconButton>
         </div>

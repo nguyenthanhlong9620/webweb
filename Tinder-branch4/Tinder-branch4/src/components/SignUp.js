@@ -199,11 +199,6 @@ export default function SignUp({clickToSignIn,clickToForgot}) {
             Sign Up
           </Button>
           <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2" onClick={clickToForgot}>
-                Forgot password?
-              </Link>
-            </Grid>
             <Grid item>
               <Link href='#' variant="body2" onClick={clickToSignIn}>
                 Already have an account? Sign In
