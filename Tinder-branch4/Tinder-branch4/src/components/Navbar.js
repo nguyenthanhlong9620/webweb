@@ -18,7 +18,7 @@ function Navbar() {
     }
     const click_about_us = () =>{
         window.scrollTo({
-            top: 1550,
+            top: 1700,
             behavior: 'smooth'
           })
     }

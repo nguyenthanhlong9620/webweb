@@ -50,7 +50,9 @@ function InfoSetting() {
     const classes = useStyles();
 
     const handleSubmit = async (event) => {
-        setAge(nowYear - birthday.substr(0, 4))
+        if(nowYear - birthday.substr(0, 4))
+        {
+            setAge(nowYear - birthday.substr(0, 4))
         localStorage.setItem("name", name);
         localStorage.setItem("age", nowYear - birthday.substr(0, 4));
         localStorage.setItem("sex", sex);
@@ -73,7 +75,11 @@ function InfoSetting() {
                     description: des,
                     partner_sexual_type: like,
                 }
-            });
+            });    
+        } else {
+            alert('error')
+        }
+        
         
     }
 

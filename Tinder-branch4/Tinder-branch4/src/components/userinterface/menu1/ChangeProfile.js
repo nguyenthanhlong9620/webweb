@@ -88,7 +88,8 @@ function FriendProfile({ unProfile }) {
     const childRefs = useMemo(() => Array(img.length).fill(0).map(i => React.createRef()), [])
 
     const handleSubmit = async(event) => {
-          setAge(nowYear - birthday.substr(0, 4))
+        if(nowYear - birthday.substr(0, 4) >= 18){
+            setAge(nowYear - birthday.substr(0, 4))
           setMain(true);
           setchImg(false);
           setchInfo(false);
@@ -114,6 +115,9 @@ function FriendProfile({ unProfile }) {
               partner_sexual_type: like,
             }
           });
+        } else {
+            alert("error")
+        }
       }
 
       
